@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  login_details:
+  users:
     build:
       context: ./micro_services
       dockerfile: ./Dockerfile
@@ -15,7 +15,21 @@ services:
     depends_on:
       - db
 
-  user_details:
+  jobs:
+    build:
+      context: ./micro_services
+      dockerfile: ./Dockerfile
+    tty: true
+    command: >
+      sh -c "python ./manage.py runserver 0.0.0.0:4002"
+    ports:
+      - "4002:4002"
+    volumes:
+      - "./micro_services/micro_services:/micro_services"
+    depends_on:
+      - db
+
+  roles:
     build:
       context: ./micro_services
       dockerfile: ./Dockerfile
@@ -28,17 +42,34 @@ services:
       - "./micro_services/micro_services:/micro_services"
     depends_on:
       - db
+  comments:
+    build:
+      context: ./micro_services
+      dockerfile: ./Dockerfile
+    tty: true
+    command: >
+      sh -c "python ./manage.py runserver 0.0.0.0:4004"
+    ports:
+      - "4004:4004"
+    volumes:
+      - "./micro_services/micro_services:/micro_services"
+    depends_on:
+      - db
 
   db:
-    image: postgres
+    image: asifsamy/nn-alpine
 
   nginx:
     build: ./web
     ports:
       - 80:80
     links:
-      - login_details
-      - user_details
+      - users
+      - jobs
+      - roles
+      - comments
     depends_on:
-      - login_details
-      - user_details
+      - users
+      - jobs
+      - roles
+      - comments

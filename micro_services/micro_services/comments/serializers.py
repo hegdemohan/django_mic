@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import login_details
+from .models import comments
 
-class loginSerializer(serializers.ModelSerializer):
+class commentsSerializer(serializers.ModelSerializer):
     class Meta:
-        model= login_details
+        model= comments
         # fields= ('userName','passWord','id')
         fields= ('__all__')
