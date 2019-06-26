@@ -42,6 +42,7 @@ services:
       - "./micro_services/micro_services:/micro_services"
     depends_on:
       - db
+      
   comments:
     build:
       context: ./micro_services
@@ -62,7 +63,7 @@ services:
   nginx:
     build: ./web
     ports:
-      - 80:80
+      - 8000:8000
     links:
       - users
       - jobs

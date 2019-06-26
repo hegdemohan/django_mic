@@ -10,7 +10,7 @@ class users(models.Model):
     lastName= models.CharField(max_length=100)
     phoneNumber= models.CharField(max_length=100)
     rating= models.FloatField()
-    totalRatings= models.IntegerField();
+    totalRatings= models.IntegerField()
     address= models.TextField()
 
     def __str__(self):

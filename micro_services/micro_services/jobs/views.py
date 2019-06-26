@@ -24,13 +24,14 @@ def getJob(job_id):
 def appendQuerySet(allJobs,job):
     return allJobs | job
     
-class getPublishedJobs(viewsets.ReadOnlyModelViewSet):
+class getJobs(viewsets.ReadOnlyModelViewSet):
     serializer_class = jobsSerializer
     def get_queryset(self):
         querySet = ''
         allJobs = jobs.objects.none()
         user_id = self.request.query_params.get("user_id",'')
-        rolesList = getAllRoles(user_id,"Publisher")
+        user_role = self.request.query_params.get("role",'')
+        rolesList = getAllRoles(user_id,user_role)
         for role in rolesList:
             job = getJob(role.__dict__['job_id_id'])
             allJobs = appendQuerySet(allJobs,job)

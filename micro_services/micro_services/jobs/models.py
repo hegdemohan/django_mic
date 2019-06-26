@@ -12,4 +12,4 @@ class jobs(models.Model):
     address= models.TextField()
 
     def __str__(self):
-        return str(self.job_id);
+        return str(self.job_id)

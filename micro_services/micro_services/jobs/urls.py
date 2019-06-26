@@ -5,7 +5,7 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register('jobs',views.jobsView)
-router.register('getPublishedJobs',views.getPublishedJobs,basename='jobs')
+router.register('getJobs',views.getJobs,basename='jobs')
 
 urlpatterns = [
     path('',include(router.urls))
