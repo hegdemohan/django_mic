@@ -6,3 +6,6 @@ class commentsSerializer(serializers.ModelSerializer):
         model= comments
         # fields= ('userName','passWord','id')
         fields= ('__all__')
+
+class allCommentSerializer(serializers.Serializer):
+    comment = serializers.CharField()

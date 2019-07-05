@@ -10,7 +10,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 class jobsView(viewsets.ModelViewSet):
-    queryset  = jobs.objects.all()
+    queryset  = jobs.objects.order_by('-job_id')
     serializer_class = jobsSerializer
 
 def getAllRoles(user_id,role):
@@ -36,3 +36,15 @@ class getJobs(viewsets.ReadOnlyModelViewSet):
             job = getJob(role.__dict__['job_id_id'])
             allJobs = appendQuerySet(allJobs,job)
         return allJobs
+
+class jobSearch(viewsets.ReadOnlyModelViewSet):
+    serializer_class = jobsSerializer
+    def get_queryset(self):
+        querySet = ''
+        jobList = jobs.objects.all()
+        search_Text = self.request.query_params.get("searchText","")
+        category = self.request.query_params.get("category","")
+        if category !="All":
+            return jobList.filter(job_title__icontains=search_Text,category__icontains=category).order_by('-job_id')
+        else:
+            return jobList.filter(job_title__icontains=search_Text).order_by('-job_id')

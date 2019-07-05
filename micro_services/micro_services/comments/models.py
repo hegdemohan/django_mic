@@ -8,7 +8,9 @@ class comments(models.Model):
     comment_id = models.AutoField(primary_key=True)
     job_id = models.ForeignKey(jobs, on_delete=models.CASCADE)
     user_id = models.ForeignKey(users, on_delete=models.CASCADE)
-    comment = models.CharField(max_length=100)
+    comment = models.TextField()
+    user_name = models.CharField(max_length=200)
+    date = models.CharField(max_length=200)
 
     def __str__(self):
-        return str(self.comment_id);
+        return str(self.comment_id)

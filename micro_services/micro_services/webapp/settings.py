@@ -27,6 +27,17 @@ DEBUG = True
 
 ALLOWED_HOSTS = [".ngrok.io",'192.168.99.100',]
 
+# Email config
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "joberdesk@gmail.com"
+EMAIL_HOST_PASSWORD = "joberdesk123"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+"""
+Unblock Captcha
+http://accounts.google.com/displayunlockcaptcha
+"""
 
 # Application definition
 
